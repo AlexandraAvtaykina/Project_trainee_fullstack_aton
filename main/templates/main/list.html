@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Номер счета</th>
+          <th scope="col">Фамилия</th>
+          <th scope="col">Имя</th>
+          <th scope="col">Отчество</th>
+          <th scope="col">Дата рождения</th>
+          <th scope="col">ИНН</th>
+          <th scope="col">ФИО ответственного</th>
+          <th scope="col">Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for object in object_list %}
+            <tr class="table">
+                <td>{{ object.account_number }}</td>
+                <td>{{ object.last_name }}</td>
+                <td>{{ object.first_name }}</td>
+                <td>{{ object.middle_name }}</td>
+                <td>{{ object.birth_date }}</td>
+                <td>{{ object.inn }}</td>
+                <td>{{ object.fullname_of_the_person_responsible }}</td>
+                <td>{{ object.status }}
+                 <a href="{% url 'main:update' object.pk %}" type="button" class="btn btn-danger">Изменить статус</a>
+                </td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}
